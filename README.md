@@ -1,6 +1,6 @@
 # Cryptography
 
-This repository contains basic cryptography implementations in Python.
+This is a basic cryptography implementation written in Python.
 
 ## License
 
