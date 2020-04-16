@@ -8,7 +8,7 @@ class Node():
         self.public_key = public_key
 
     def decrypt(self, sending_node, data):
-        other_key = sending_note.get_public_key()
+        other_key = sending_node.get_public_key()
         own_key = self.private_key
         print("Not Defined")
 
