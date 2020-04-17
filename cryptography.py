@@ -51,12 +51,12 @@ class Node():
 
 def main():
     # Example Usage
-    Alice = Node(83, 67)
-    Bob = Node(41, 59)
+    alice = Node(83, 67)
+    bob = Node(41, 59)
 
     message = 5
-    message = Alice.encrypt(Bob, message)
-    message = Bob.decrypt(Alice, message)
+    message = alice.encrypt(bob, message)
+    message = bob.decrypt(alice, message)
     print(message)
 
 if __name__ == "__main__":
