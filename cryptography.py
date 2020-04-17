@@ -50,7 +50,6 @@ class Node():
         return text
 
 def main():
-    # Example Usage
     alice = Node(83, 67)
     bob = Node(41, 59)
 
