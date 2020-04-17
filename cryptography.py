@@ -16,6 +16,7 @@ def generate_public_key(n, phi):
     e = random.randrange(1, phi)
     while gcd(e, phi) != 1:
         e = random.randrange(1, phi)
+    print(e)
     return e
 
 # Extended euclidean algorithm for multiplicative inverse
@@ -40,25 +41,27 @@ class Node():
     # Encode with private key of sender and then public key of recipient
     def encrypt(self, recipient, text):
         (n, e) = recipient.public_key
-        encrypted_text = []
+        output = []
         for character in text:
-            encrypted_character = (ord(character) ** e) % n
-            encrypted_text.append(encrypted_character)
-        return encrypted_text
+            character = ord(character)
+            character = (character ** e) % n
+            output.append(character)
+        return output
 
     # Decode with private key of recipient and then public key of sender
-    def decrypt(self, sender, encrypted_text):
+    def decrypt(self, sender, text):
         (n, d) = self.private_key
-        text = ""
-        for encrypted_character in encrypted_text:
-            character = chr((encrypted_character ** d) % n)
-            text += character
-        return text
+        output = ""
+        for character in text:
+            character = (character ** d) % n
+            character = chr(character)
+            output += character
+        return output
 
 def main():
     alice = Node(83, 67)
     bob = Node(41, 59)
-    message = "Hello, World!"
+    message = "Hi"
     print("Text Sent: " + message)
     message = alice.encrypt(bob, message)
     print("Transmission: " + str(message))
