@@ -29,12 +29,12 @@ def generate_public_key(n, phi):
 
 # Extended euclidean algorithm for multiplicative inverse
 def generate_private_key(e, phi):
-    d, d_new = 0, 1
-    r, r_new = phi, e
-    while r_new != 0:
-        a = r // r_new
-        d, d_new = d_new, d - a * d_new
-        r, r_new = r_new, r - a * r_new
+    d, d_next = 0, 1
+    r, r_next = phi, e
+    while r != 1:
+        quotient = r // r_next
+        d, d_next = d_next, d - d_next * quotient
+        r, r_next = r_next, r - r_next * quotient
     return d % phi
 
 # Convert from string to ASCII
