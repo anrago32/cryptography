@@ -1,5 +1,5 @@
 # Cryptography
-# Basic cryptography implementation written in python
+# Basic RSA Implementation Written in Python
 # Written by Antony Gordon, Alex Rago, Nick Rock, 2020
 
 import random

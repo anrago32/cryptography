@@ -1,6 +1,6 @@
 # Cryptography
 
-This is a basic cryptography implementation written in Python.
+This is a basic RSA implementation written in Python.
 
 ## License
 
