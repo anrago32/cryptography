@@ -63,10 +63,11 @@ def decrypt(recipient, sequence):
     return sequence
 
 def main():
-    # Using 8-bit primes
+    # Nodes using 8-bit primes
     alice = Node(211, 163)
     bob = Node(113, 199)
 
+    # First transmission example
     message = "Hello, World!"
     print("Text Sent\t->\t" + message)
     message = encrypt(alice, message)
@@ -74,6 +75,7 @@ def main():
     message = decrypt(alice, message)
     print("Text Received\t->\t" + message)
 
+    # Second transmission example
     message = "Hello, Bob!"
     print("\nText Sent\t->\t" + message)
     message = encrypt(alice, message)
