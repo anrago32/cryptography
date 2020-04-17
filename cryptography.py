@@ -5,11 +5,11 @@
 from random import randrange
 
 class Node():
-    def __init__(self, p, q):
-        n = p * q
-        phi = (p - 1) * (q - 1)
+    def __init__(self, name, p, q):
+        n, phi = p * q, (p - 1) * (q - 1)
         e = generate_public_key(n, phi)
         d = generate_private_key(e, phi)
+        self.name = name
         self.public_key = (n, e)
         self.private_key = (n, d)
 
@@ -38,49 +38,49 @@ def generate_private_key(e, phi):
     return d % phi
 
 # Convert from string to ASCII
-def fromString(sequence):
+def from_string(sequence):
     sequence = [ord(c) for c in sequence]
     return sequence
 
 # Convert to string from ASCII
-def toString(sequence):
+def to_string(sequence):
     sequence = [chr(c) for c in sequence]
     return "".join(sequence)
 
 # Encode with public key of recipient
-def encrypt(recipient, sequence):
+def encrypt(sequence, recipient):
     (n, e) = recipient.public_key
-    sequence = fromString(sequence)
     sequence = [(c ** e) % n for c in sequence]
     return sequence
 
 # Decode with private key of recipient
-def decrypt(recipient, sequence):
+def decrypt(sequence, recipient):
     (n, d) = recipient.private_key
     sequence = [(c ** d) % n for c in sequence]
-    sequence = toString(sequence)
     return sequence
 
+# Simulate encrypted network transmission
+def simulate_transmission(message, recipient):
+    print("\n>> \"" + message + "\" sent to " + recipient.name + "\n")
+    message = from_string(message)
+    print("\tOriginal Sequence:\n\t" + str(message))
+    message = encrypt(message, recipient)
+    print("\tEncrypted Sequence:\n\t" + str(message) + "\n")
+    print(">> Encrypted Sequence Transmitted\n")
+    print("\tReceived Sequence:\n\t" + str(message))
+    message = decrypt(message, recipient)
+    print("\tDecrypted Sequence:\n\t" + str(message) + "\n")
+    message = to_string(message)
+    print(">> \"" + message + "\" received by " + recipient.name + "\n")
+
 def main():
-    # Nodes using 8-bit primes
-    alice = Node(211, 163)
-    bob = Node(113, 199)
+    # Nodes with 8-bit primes
+    node1 = Node("Alice", 211, 163)
+    node2 = Node("Bob", 113, 199)
 
-    # First transmission example
-    message = "Hello, World!"
-    print("Text Sent\t->\t" + message)
-    message = encrypt(alice, message)
-    print("Transmission\t->\t" + toString(message))
-    message = decrypt(alice, message)
-    print("Text Received\t->\t" + message)
-
-    # Second transmission example
-    message = "Hello, Bob!"
-    print("\nText Sent\t->\t" + message)
-    message = encrypt(bob, message)
-    print("Transmission\t->\t" + toString(message))
-    message = decrypt(bob, message)
-    print("Text Received\t->\t" + message)
+    # Simulate Transmissions
+    simulate_transmission("Hello, World!", node1)
+    simulate_transmission("Hello, Bob!", node2)
 
 if __name__ == "__main__":
     main()
