@@ -4,6 +4,16 @@
 
 import random
 
+# Convert from string to ASCII
+def fromString(string):
+    string = [ord(c) for c in string]
+    return string
+
+# Convert to string from ASCII
+def toString(string):
+    string = [chr(c) for c in string]
+    return "".join(string)
+
 # Euclidean algorithm for greatest common divisor
 def gcd(a, b):
     if b == 0:
@@ -16,7 +26,6 @@ def generate_public_key(n, phi):
     e = random.randrange(1, phi)
     while gcd(e, phi) != 1:
         e = random.randrange(1, phi)
-    print(e)
     return e
 
 # Extended euclidean algorithm for multiplicative inverse
@@ -39,34 +48,28 @@ class Node():
         self.private_key = (n, d)
 
     # Encode with private key of sender and then public key of recipient
-    def encrypt(self, recipient, text):
+    def encrypt(self, recipient, string):
         (n, e) = recipient.public_key
-        output = []
-        for character in text:
-            character = ord(character)
-            character = (character ** e) % n
-            output.append(character)
-        return output
+        string = fromString(string)
+        string = [(c ** e) % n for c in string]
+        return string
 
     # Decode with private key of recipient and then public key of sender
-    def decrypt(self, sender, text):
+    def decrypt(self, sender, string):
         (n, d) = self.private_key
-        output = ""
-        for character in text:
-            character = (character ** d) % n
-            character = chr(character)
-            output += character
-        return output
+        string = [(c ** d) % n for c in string]
+        string = toString(string)
+        return string
 
 def main():
     alice = Node(83, 67)
     bob = Node(41, 59)
-    message = "Hi"
-    print("Text Sent: " + message)
+    message = "Hello, World!"
+    print("Text Sent\t->\t" + message)
     message = alice.encrypt(bob, message)
-    print("Transmission: " + str(message))
+    print("Transmission\t->\t" + toString(message))
     message = bob.decrypt(alice, message)
-    print("Text Received: " + message)
+    print("Text Received\t->\t" + message)
 
 if __name__ == "__main__":
     main()
