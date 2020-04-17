@@ -4,7 +4,6 @@
 
 import random
 
-# Data transmission node
 class Node():
     def __init__(self, p, q):
         n = p * q
