@@ -40,23 +40,30 @@ class Node():
     # Encode with private key of sender and then public key of recipient
     def encrypt(self, recipient, text):
         (n, e) = recipient.public_key
-        text = (text ** e) % n
-        return text
+        encrypted_text = []
+        for character in text:
+            encrypted_character = (ord(character) ** e) % n
+            encrypted_text.append(encrypted_character)
+        return encrypted_text
 
     # Decode with private key of recipient and then public key of sender
-    def decrypt(self, sender, text):
+    def decrypt(self, sender, encrypted_text):
         (n, d) = self.private_key
-        text = (text ** d) % n
+        text = ""
+        for encrypted_character in encrypted_text:
+            character = chr((encrypted_character ** d) % n)
+            text += character
         return text
 
 def main():
     alice = Node(83, 67)
     bob = Node(41, 59)
-
-    message = 5
+    message = "Hello, World!"
+    print("Text Sent: " + message)
     message = alice.encrypt(bob, message)
+    print("Transmission: " + str(message))
     message = bob.decrypt(alice, message)
-    print(message)
+    print("Text Received: " + message)
 
 if __name__ == "__main__":
     main()
