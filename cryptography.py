@@ -77,9 +77,9 @@ def main():
     # Second transmission example
     message = "Hello, Bob!"
     print("\nText Sent\t->\t" + message)
-    message = encrypt(alice, message)
+    message = encrypt(bob, message)
     print("Transmission\t->\t" + toString(message))
-    message = decrypt(alice, message)
+    message = decrypt(bob, message)
     print("Text Received\t->\t" + message)
 
 if __name__ == "__main__":
