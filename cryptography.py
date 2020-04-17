@@ -2,7 +2,7 @@
 # Basic RSA Implementation Written in Python
 # Written by Antony Gordon, Alex Rago, Nick Rock, 2020
 
-import random
+from random import randrange
 
 class Node():
     def __init__(self, p, q):
@@ -22,9 +22,9 @@ def gcd(a, b):
 
 # Algorithm to generate relatively prime public key
 def generate_public_key(n, phi):
-    e = random.randrange(1, phi)
+    e = randrange(1, phi)
     while gcd(e, phi) != 1:
-        e = random.randrange(1, phi)
+        e = randrange(1, phi)
     return e
 
 # Extended euclidean algorithm for multiplicative inverse
