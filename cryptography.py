@@ -4,6 +4,16 @@
 
 import random
 
+# Data transmission node
+class Node():
+    def __init__(self, p, q):
+        n = p * q
+        phi = (p - 1) * (q - 1)
+        e = generate_public_key(n, phi)
+        d = generate_private_key(e, phi)
+        self.public_key = (n, e)
+        self.private_key = (n, d)
+
 # Euclidean algorithm for greatest common divisor
 def gcd(a, b):
     if b == 0:
@@ -37,15 +47,6 @@ def fromString(sequence):
 def toString(sequence):
     sequence = [chr(c) for c in sequence]
     return "".join(sequence)
-
-class Node():
-    def __init__(self, p, q):
-        n = p * q
-        phi = (p - 1) * (q - 1)
-        e = generate_public_key(n, phi)
-        d = generate_private_key(e, phi)
-        self.public_key = (n, e)
-        self.private_key = (n, d)
 
 # Encode string with public key of recipient
 def encrypt(recipient, sequence):
