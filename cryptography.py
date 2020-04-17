@@ -47,7 +47,7 @@ def toString(sequence):
     sequence = [chr(c) for c in sequence]
     return "".join(sequence)
 
-# Encode string with public key of recipient
+# Encode with public key of recipient
 def encrypt(recipient, sequence):
     (n, e) = recipient.public_key
     sequence = fromString(sequence)
