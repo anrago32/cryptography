@@ -4,6 +4,7 @@
 
 from random import randrange
 
+# Simulated network node
 class Node():
     def __init__(self, name, p, q):
         n, phi = p * q, (p - 1) * (q - 1)
@@ -78,9 +79,9 @@ def main():
     node1 = Node("Alice", 211, 163)
     node2 = Node("Bob", 113, 199)
 
-    # Simulate Transmissions
+    # Simulated transmissions
     simulate_transmission("Hello, World!", node1)
-    simulate_transmission("Hello, Bob!", node2)
+    simulate_transmission("Secret Message", node2)
 
 if __name__ == "__main__":
     main()
