@@ -18,8 +18,7 @@ class Node():
 def gcd(a, b):
     if b == 0:
         return a
-    else:
-        return gcd(b, a % b)
+    return gcd(b, a % b)
 
 # Algorithm to generate relatively prime public key
 def generate_public_key(n, phi):
@@ -32,7 +31,7 @@ def generate_public_key(n, phi):
 def generate_private_key(e, phi):
     d, d_new = 0, 1
     r, r_new = phi, e
-    while r_new > 0:
+    while r_new != 0:
         a = r // r_new
         d, d_new = d_new, d - a * d_new
         r, r_new = r_new, r - a * r_new
