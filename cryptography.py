@@ -5,14 +5,14 @@
 import random
 
 # Convert from string to ASCII
-def fromString(string):
-    string = [ord(c) for c in string]
-    return string
+def fromString(sequence):
+    sequence = [ord(c) for c in sequence]
+    return sequence
 
 # Convert to string from ASCII
-def toString(string):
-    string = [chr(c) for c in string]
-    return "".join(string)
+def toString(sequence):
+    sequence = [chr(c) for c in sequence]
+    return "".join(sequence)
 
 # Euclidean algorithm for greatest common divisor
 def gcd(a, b):
@@ -47,23 +47,24 @@ class Node():
         self.public_key = (n, e)
         self.private_key = (n, d)
 
-    # Encode with private key of sender and then public key of recipient
-    def encrypt(self, recipient, string):
+    # Encode string with public key of recipient
+    def encrypt(self, recipient, sequence):
         (n, e) = recipient.public_key
-        string = fromString(string)
-        string = [(c ** e) % n for c in string]
-        return string
+        sequence = fromString(sequence)
+        sequence = [(c ** e) % n for c in sequence]
+        return sequence
 
-    # Decode with private key of recipient and then public key of sender
-    def decrypt(self, sender, string):
+    # Decode with private key of recipient
+    def decrypt(self, sender, sequence):
         (n, d) = self.private_key
-        string = [(c ** d) % n for c in string]
-        string = toString(string)
-        return string
+        sequence = [(c ** d) % n for c in sequence]
+        sequence = toString(sequence)
+        return sequence
 
 def main():
-    alice = Node(83, 67)
-    bob = Node(41, 59)
+    # Using 8-bit primes
+    alice = Node(211, 163)
+    bob = Node(113, 199)
     message = "Hello, World!"
     print("Text Sent\t->\t" + message)
     message = alice.encrypt(bob, message)
