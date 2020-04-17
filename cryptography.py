@@ -62,17 +62,17 @@ def decrypt(sequence, recipient):
 
 # Simulate encrypted network transmission
 def simulate_transmission(message, recipient):
-    print("\n>> \"" + message + "\" sent to " + recipient.name + "\n")
+    print("\n>> \"" + message + "\" Sent to " + recipient.name + "\n")
     message = from_string(message)
     print("\tOriginal Sequence:\n\t" + str(message))
     message = encrypt(message, recipient)
     print("\tEncrypted Sequence:\n\t" + str(message) + "\n")
-    print(">> Encrypted Sequence Transmitted\n")
+    print(">> Sequence Transmitted (\"" + to_string(message) + "\")\n")
     print("\tReceived Sequence:\n\t" + str(message))
     message = decrypt(message, recipient)
     print("\tDecrypted Sequence:\n\t" + str(message) + "\n")
     message = to_string(message)
-    print(">> \"" + message + "\" received by " + recipient.name + "\n")
+    print(">> \"" + message + "\" Received by " + recipient.name + "\n")
 
 def main():
     # Nodes with 8-bit primes
