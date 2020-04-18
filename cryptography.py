@@ -8,8 +8,8 @@ from random import randrange
 class Node():
     def __init__(self, name, p, q):
         n, phi = p * q, (p - 1) * (q - 1)
-        e = generate_public_key(n, phi)
-        d = generate_private_key(e, phi)
+        e = generate_public_key(phi)
+        d = generate_private_key(phi, e)
         self.name = name
         self.public_key = (n, e)
         self.private_key = (n, d)
@@ -21,14 +21,14 @@ def gcd(a, b):
     return a
 
 # Algorithm to generate relatively prime public key
-def generate_public_key(n, phi):
+def generate_public_key(phi):
     e = randrange(1, phi)
     while gcd(e, phi) != 1:
         e = randrange(1, phi)
     return e
 
 # Extended euclidean algorithm for modular inverse
-def generate_private_key(e, phi):
+def generate_private_key(phi, e):
     d, d_next = 0, 1
     r, r_next = phi, e
     while r != 1:
