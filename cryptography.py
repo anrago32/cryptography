@@ -16,9 +16,9 @@ class Node():
 
 # Euclidean algorithm for greatest common divisor
 def gcd(a, b):
-    if b == 0:
-        return a
-    return gcd(b, a % b)
+    while b != 0:
+        a, b = b, a % b
+    return a
 
 # Algorithm to generate relatively prime public key
 def generate_public_key(n, phi):
