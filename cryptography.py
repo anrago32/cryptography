@@ -23,7 +23,7 @@ def gcd(a, b):
 # Algorithm to generate relatively prime public key
 def generate_public_key(phi):
     e = randrange(1, phi)
-    while gcd(e, phi) != 1:
+    while gcd(phi, e) != 1:
         e = randrange(1, phi)
     return e
 
