@@ -50,13 +50,13 @@ def to_string(sequence):
 # Encode with public key of recipient
 def encrypt(sequence, recipient):
     (n, e) = recipient.public_key
-    sequence = [(c ** e) % n for c in sequence]
+    sequence = [pow(c, e, n) for c in sequence]
     return sequence
 
 # Decode with private key of recipient
 def decrypt(sequence, recipient):
     (n, d) = recipient.private_key
-    sequence = [(c ** d) % n for c in sequence]
+    sequence = [pow(c, d, n) for c in sequence]
     return sequence
 
 # Simulate encrypted network transmission
