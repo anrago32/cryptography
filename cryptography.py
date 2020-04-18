@@ -27,7 +27,7 @@ def generate_public_key(n, phi):
         e = randrange(1, phi)
     return e
 
-# Extended euclidean algorithm for multiplicative inverse
+# Extended euclidean algorithm for modular inverse
 def generate_private_key(e, phi):
     d, d_next = 0, 1
     r, r_next = phi, e
